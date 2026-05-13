@@ -130,6 +130,7 @@ def train_and_evaluate(df):
     # Try MLflow
     use_mlflow = False
     try:
+        # pyrefly: ignore [missing-import]
         import mlflow
         mlflow.set_tracking_uri(MLFLOW_URI)
         mlflow.set_experiment("readmission_prediction")

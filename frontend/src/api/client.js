@@ -14,7 +14,9 @@ const client = axios.create({
 client.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    // Don't redirect on /auth/me (expected 401 when not logged in)
+    const url = error.config?.url || '';
+    if (error.response?.status === 401 && !url.includes('/auth/me')) {
       window.location.href = '/login';
     }
     return Promise.reject(error);
